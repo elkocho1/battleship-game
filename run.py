@@ -34,7 +34,40 @@ def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
         for r in range(start_row, end_row):
             for c in range(start_col, end_col):
                 grid[r][c] = "O"
-    return all_valid            
+    return all_valid
+
+def try_to_place_ship_on_grid(row, col, direction, length):
+    """ Based on direction I place a ship on the grid"""
+    global board_size
+
+    start_row = row
+    end_row = row + 1
+    start_col = col
+    end_col = col + 1
+
+    if direction == "left":
+        if col - length < 0:
+            return False
+        start_col = col - length + 1
+    
+    elif direction == "right":
+        if col + length >= board_size:
+            return False
+        end_col = col + length
+
+    elif direction == "up":
+        if row - length < 0:
+            return False
+        start_row = row - length + 1
+
+    elif direction == "down":
+        if row + length >= board_size:
+            return False
+        end_row = row + length
+
+    return check_grid_and_place_ship(start_row, end_row, start_col, end_col)
+        
+
 
 def play():
     print("Welcome to my Battleship game")
