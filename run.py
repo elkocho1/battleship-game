@@ -29,7 +29,12 @@ def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
             if grid[r][c] != ".":
                 all_valid = False
                 break
-
+    if all_valid:
+        ship_positions.append([start_row, end_row, start_col, end_col])
+        for r in range(start_row, end_row):
+            for c in range(start_col, end_col):
+                grid[r][c] = "O"
+    return all_valid            
 
 def play():
     print("Welcome to my Battleship game")
