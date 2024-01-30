@@ -6,7 +6,7 @@ import random
 
 """
  Battleship game
-"""
+
 
 # Global variables
 grid = [[]]
@@ -124,9 +124,38 @@ def print_board():
         print(str(i), end=" ")
     print("")
 
+"""
+
+class Ship:
+    def __init__(self, name, size):
+        self.name = name
+        self.size = size
+        self.hits = 0
+
+    def is_sunk(self):
+        return self.hits == self.size
+
+class Board:
+    def __init__(self, size):
+        self.size = size
+        self.grid = []
+        self.ships = []
+
+    #add methods for placing ships, checking hits
+
+class Game:
+    def __init__(self):
+        self.player_board = Board(10)
+        self.bullets_left = 50
+        self.num_of_ships_sunk = 0
+
+    #add methods for game loop, shooting and game over
+
+
 def play():
     print("Welcome to my Battleship game")
     print("Board Size ist 10 x 10 and each player has 8 ships.")
     print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
+
 
 play()
