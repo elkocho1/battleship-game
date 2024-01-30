@@ -96,7 +96,7 @@ def create_board():
         if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
     
-    
+
 
 def print_board():
     """ Print the board with rows and colums"""
@@ -127,9 +127,12 @@ def print_board():
 """
 
 class Ship:
-    def __init__(self, name, size):
-        self.name = name
-        self.size = size
+    def __init__(self, start_row, end_row, start_col, end_col):
+        """classificate a ship with its position and hit counts"""
+        self.start_row = start_row
+        self.end_row = end_row
+        self.start_col = start_col
+        self.end_col = end_col
         self.hits = 0
 
     def is_sunk(self):
