@@ -7,8 +7,9 @@ import random
 """
  Battleship game
 """
+def play():
+    print("Welcome to my Battleship game")
+    print("Board Size ist 10 x 10 and each player has 8 ships with a max size of 4 hits.")
+    print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
 
-print("Welcome to my Battleship game")
-print("Board Size ist 10 x 10 and each player has 8 ships with a max size of 4 hits.")
-print("You have 50 bullets to take down the enemy ships. Enjoy the game!")
-
+play()
