@@ -9,8 +9,8 @@ import random
 """
 
 # Global variables
-board = [[]]
-board.size = 10
+grid = [[]]
+grid_size = 10
 num_of_ships = 2
 bullets_left = 50
 game_over = False
@@ -20,7 +20,7 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
     """ Check the row and column to place ships there"""
-    global board
+    global grid
     global ship_positions
 
     all_valid = True
@@ -38,7 +38,7 @@ def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
 
 def try_to_place_ship_on_grid(row, col, direction, length):
     """ Based on direction I place a ship on the grid"""
-    global board_size
+    global grid_size
 
     start_row = row
     end_row = row + 1
@@ -51,7 +51,7 @@ def try_to_place_ship_on_grid(row, col, direction, length):
         start_col = col - length + 1
     
     elif direction == "right":
-        if col + length >= board_size:
+        if col + length >= grid_size:
             return False
         end_col = col + length
 
@@ -61,7 +61,7 @@ def try_to_place_ship_on_grid(row, col, direction, length):
         start_row = row - length + 1
 
     elif direction == "down":
-        if row + length >= board_size:
+        if row + length >= grid_size:
             return False
         end_row = row + length
 
@@ -70,19 +70,19 @@ def try_to_place_ship_on_grid(row, col, direction, length):
 
 def create_board():
     """ Create the grid and randomly place down the ships of different sizes"""
-    global board
-    global board_size
+    global grid
+    global grid_size
     global num_of_ships
     global ship_positions
 
-    rows, cols = (board_size, board_size)
+    rows, cols = (grid_size, grid_size)
 
-    board = []
+    grid = []
     for r in range(rows):
         row = []
         for c in range(cols):
             row.append(".")
-        board.append(row)
+        grid.append(row)
 
     num_of_ships_placed = 0
 
@@ -95,10 +95,34 @@ def create_board():
         ship_size = random.randint(3, 5)
         if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
-        
+    
+    
 
 def print_board():
     """ Print the board with rows and colums"""
+    global grid
+    global alphabet
+
+    debug_mode = True
+
+    alphabet = alphabet[0: len(grid) + 1]
+
+    for row in range(len(grid)):
+        print(alphabet[row], end=") ")
+        for col in range(len(grid[row])):
+            if grid[row][col] == "O":
+                if debug_mode:
+                    print("O", end=" ")
+                else:
+                    print(".", end=" ")
+            else:
+                print(grid[row][col], end=" ")
+        print("")
+
+    print("  ", end=" ")
+    for i in range(len(grid[0])):
+        print(str(i), end=" ")
+    print("")
 
 def play():
     print("Welcome to my Battleship game")
