@@ -76,6 +76,25 @@ def create_board():
     global ship_positions
 
     rows, cols = (board_size, board_size)
+
+    board = []
+    for r in range(rows):
+        row = []
+        for c in range(cols):
+            row.append(".")
+        board.append(row)
+
+    num_of_ships_placed = 0
+
+    ship_positions = []
+
+    while num_of_ships_placed != num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
+            num_of_ships_placed += 1
         
 
 def print_board():
