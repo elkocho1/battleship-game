@@ -70,6 +70,12 @@ def try_to_place_ship_on_grid(row, col, direction, length):
 
 def create_board():
     """ Create the grid and randomly place down the ships of different sizes"""
+    global board
+    global board_size
+    global num_of_ships
+    global ship_positions
+
+    rows, cols = (board_size, board_size)
         
 
 def print_board():
