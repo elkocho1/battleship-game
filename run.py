@@ -139,12 +139,25 @@ class Ship:
         return self.hits == self.size
 
 class Board:
-    def __init__(self, size):
+    def __init__(self, size=10):
+        """initialize the board with a given size"""
         self.size = size
         self.grid = []
+        for row in range(size):
+            row_data = []
+            for col in range(size):
+                row_data.append(".")
+            self.grid.append(row_data)
         self.ships = []
 
     #add methods for placing ships, checking hits
+
+    def place_ship(self, ship):
+        """Place ship and mark its position"""
+        for r in range(ship.start_row, ship.end_row + 1):
+            for c in range(ship.start_col, ship.end_col + 1):
+                self.grid[r][c] = "O"
+        self.ships.append(ship)
 
 class Game:
     def __init__(self):
