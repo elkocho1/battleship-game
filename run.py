@@ -161,12 +161,21 @@ class Board:
 
 class Game:
     def __init__(self):
-        self.player_board = Board(10)
+        self.player_board = Board()
         self.bullets_left = 50
         self.num_of_ships_sunk = 0
 
     #add methods for game loop, shooting and game over
 
+    def place_ships(self, num_of_ships=8):
+        """Place a specific number of ships randomly on the board"""
+        direction = ["left", "right", "up", "down"]
+
+    def try_to_place_ship(self, row, col, direction, length):
+        """try to place a ship on the board in a specified direction and length"""
+        start_row, end_row = row, row
+        start_col, end_col = col, col
+        
 
 def play():
     print("Welcome to my Battleship game")
