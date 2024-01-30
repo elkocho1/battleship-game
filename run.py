@@ -23,7 +23,12 @@ def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
     global board
     global ship_positions
 
-    
+    all_valid = True
+    for r in range(start_row, end_row):
+        for c in range(start_col, end_col):
+            if grid[r][c] != ".":
+                all_valid = False
+                break
 
 
 def play():
