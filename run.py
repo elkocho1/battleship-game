@@ -66,8 +66,14 @@ def try_to_place_ship_on_grid(row, col, direction, length):
         end_row = row + length
 
     return check_grid_and_place_ship(start_row, end_row, start_col, end_col)
+
+
+def create_board():
+    """ Create the grid and randomly place down the ships of different sizes"""
         
 
+def print_board():
+    """ Print the board with rows and colums"""
 
 def play():
     print("Welcome to my Battleship game")
