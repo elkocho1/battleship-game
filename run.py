@@ -18,6 +18,13 @@ num_of_ships_sunk = 0
 ship_positions = [[]]
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
+    """ Check the row and column to place ships there"""
+    global board
+    global ship_positions
+
+    
+
 
 def play():
     print("Welcome to my Battleship game")
