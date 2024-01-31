@@ -81,7 +81,7 @@ class Game:
 
     #add methods for game loop, shooting and game over
 
-    def place_ships(self, num_of_ships=8):
+    def place_ships(self, board, num_of_ships=8):
         """Place a specific number of ships randomly on the board"""
         directions = ["left", "right", "up", "down"]
         for i in range(num_of_ships):
@@ -90,9 +90,9 @@ class Game:
                 row, col = random.randint(0, 9), random.randint(0, 9)
                 direction = random.choice(directions)
                 ship_size = random.randint(3, 5)
-                placed = self.try_to_place_ship(row, col, direction, ship_size)
+                placed = self.try_to_place_ship(board, row, col, direction, ship_size)
 
-    def try_to_place_ship(self, row, col, direction, length):
+    def try_to_place_ship(self, board, row, col, direction, length):
         """try to place a ship on the board in a specified direction and length"""
         start_row, end_row = row, row
         start_col, end_col = col, col
@@ -118,7 +118,7 @@ class Game:
             end_row = row + length - 1
 
         ship = Ship(start_row, end_row, start_col, end_col)
-        self.board.place_ship(ship)
+        board.place_ship(ship)
         return True
 
     def get_shot_input(self):
