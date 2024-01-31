@@ -42,6 +42,23 @@ class Board:
                 self.grid[r][c] = "O"
         self.ships.append(ship)
 
+    def print_board(self, debug_mode=False):
+        """Print the grid with rows and cols"""
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        for row in range(self.size):
+            print(alphabet[row], end=") ")
+            for col in range(self.size):
+                if self.grid[row][col] == "O" and not debug_mode:
+                    print(".", end=" ")
+                else:
+                    print(self.grid[row][col], end=" ")
+            print("")
+
+        print("  ", end=" ")
+        for i in range(self.size):
+            print(str(i), end=" ")
+        print("")
+
 class Game:
     def __init__(self):
         self.player_board = Board()
