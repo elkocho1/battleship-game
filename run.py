@@ -78,7 +78,7 @@ class Game:
         self.enemy_board = Board()
         self.tracking_board = Board()
         self.bullets_left = 50
-        self.num_of_ships_sunk = 0
+        
 
     #add methods for game loop, shooting and game over
 
@@ -156,7 +156,8 @@ class Game:
         self.bullets_left -= 1
 
     def is_game_over(self):
-        if self.num_of_ships_sunk == len(self.board.ships):
+        sunk_ships = sum(1 for ship in self.enemy_board.ships if ship.is_sunk())
+        if sunk_ships == len(self.enemy_board.ships):
             print("Congratulations, you have sunk all the ships!")
             return True
         if self.bullets_left <= 0:
