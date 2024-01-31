@@ -129,6 +129,8 @@ class Game:
                 row, col = alphabet.index(shot[0]), int(shot[1])
                 if row >= self.board.size or col >= self.board.size:
                     raise ValueError("Shot out of range. Please choose within A-J and 0-9.")
+                if self.board.grid[row][col] in ["X", "#"]:
+                    raise ValueError("You have already shot here. Choose another target coordinate.")
                 return row, col
             except ValueError as e:
                 print(e)
