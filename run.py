@@ -175,7 +175,27 @@ class Game:
         """try to place a ship on the board in a specified direction and length"""
         start_row, end_row = row, row
         start_col, end_col = col, col
+
+        if direction == "left":
+            if col - length < 0:
+                return False
+            start_col = col - length + 1
+
+        elif direction == "right":
+            if col + length > self.board.size:
+                return False
+            end_col = col + length - 1
         
+        elif direction == "up":
+            if row - length < 0:
+                return False
+            start_row = row - length + 1
+        
+        elif direction == "down":
+            if row + length > self.board.size:
+                return False
+            end_row = row + length - 1
+            
 
 def play():
     print("Welcome to my Battleship game")
