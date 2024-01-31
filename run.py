@@ -149,6 +149,7 @@ class Game:
                 break
         if is_player_shooting:
             self.tracking_board.update_grid(row, col, hit)
+            self.enemy_board.update_grid(row, col, hit)
         else:
             self.player_board.update_grid(row, col, hit)
         return hit
@@ -160,7 +161,6 @@ class Game:
         print("Hit!" if hit else "Miss.")
 
     def is_game_over(self):
-        sunk_ships = sum(1 for ship in self.enemy_board.ships if ship.is_sunk())
         if self.bullets_left <= 0:
             print("Game over. You have run out of bullets.")
             return True
@@ -190,8 +190,6 @@ class Game:
             print(f"You shoot at ({row}, {col}): ", end="")
             if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
                 print("Hit!")
-                if all(ship.is_sunk() for ship in self.enemy_board.ships):
-                    break
             else:
                 print("Miss.")
             self.bullets_left -= 1
