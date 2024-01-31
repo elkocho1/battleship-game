@@ -61,7 +61,7 @@ class Board:
 
 class Game:
     def __init__(self):
-        self.player_board = Board()
+        self.board = Board()
         self.bullets_left = 50
         self.num_of_ships_sunk = 0
 
@@ -103,7 +103,9 @@ class Game:
                 return False
             end_row = row + length - 1
 
-        
+        ship = Ship(start_row, end_row, start_col, end_col)
+        self.board.place_ship(ship)
+        return True
 
 
     def play(self):
@@ -111,6 +113,8 @@ class Game:
         print("Board Size ist 10 x 10 and each player has 8 ships.")
         print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
         self.place_ships()
+
+        self.board.print_board()
 
 game = Game()
 game.play()
