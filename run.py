@@ -141,7 +141,7 @@ class Game:
                 print(e)
 
 
-    def shoot(self, board, row, col):
+    def shoot(self, board, row, col, is_player_shooting=True):
         hit = False
         ship_present = False
         for ship in board.ships:
@@ -149,13 +149,16 @@ class Game:
                 hit = True
                 ship_present = True
                 break
-        board.update_grid(row, col, hit, ship_present)
+        if is_player_shooting:
+            board.update_grid(row, col, hit, False)
+        else:
+            board.update_grid(row, col, hit, ship_present)
         return hit
 
     def enemy_turn(self):
         row, col = random.randint(0, 9), random.randint(0, 9)
         print(f"Enemy shoots at ({row}, {col}): ", end="")
-        hit = self.shoot(self.player_board, row, col)
+        hit = self.shoot(self.player_board, row, col, False)
         print("Hit!" if hit else "Miss.")
 
     def is_game_over(self):
@@ -165,6 +168,9 @@ class Game:
             return True
         if self.bullets_left <= 0:
             print("Game over. You have run out of bullets.")
+            return True
+        if all(ship.is_sunk() for ship in self.enemy_board.ships):
+            print("Congratulation, you have sunk all the ships!")
             return True
         return False
 
@@ -181,12 +187,17 @@ class Game:
             print("\nTracking Board:")
             self.tracking_board.print_board(hide_ships=True)
             print(f"Bullets left: {self.bullets_left}")
+
             row, col = self.get_shot_input()
             print(f"You shoot at ({row}, {col}): ", end="")
-            hit = self.shoot(self.tracking_board, row, col)
-            print("Hit!" if hit else "Miss.")
-
-            self.enemy_turn()
+            if self.shoot(self.tracking_board, row, col):
+                print("Hit!")
+            else:
+                print("Miss.")
+            self.bullets_left -= 1
+            
+            if not self.is_game_over():
+                self.enemy_turn()
 
 game = Game()
 game.play()
