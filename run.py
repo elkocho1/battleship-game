@@ -23,7 +23,7 @@ class Ship:
         
 
     def is_sunk(self):
-        length = (self.end_row - self.start_row + 1) + (self.end_col - self.start_col + 1)
+        length = (self.end_row - self.start_row + 1) * (self.end_col - self.start_col + 1)
         return self.hits == length
 
 class Board:
@@ -157,14 +157,14 @@ class Game:
 
     def is_game_over(self):
         sunk_ships = sum(1 for ship in self.enemy_board.ships if ship.is_sunk())
-        if sunk_ships == len(self.enemy_board.ships):
-            print("Congratulations, you have sunk all the ships!")
-            return True
         if self.bullets_left <= 0:
             print("Game over. You have run out of bullets.")
             return True
         if all(ship.is_sunk() for ship in self.enemy_board.ships):
-            print("Congratulation, you have sunk all the ships!")
+            print("Congratulations, you have sunk all the ships!")
+            return True
+        if all(ship.is_sunk() for ship in self.player_board.ships):
+            print("Sorry, all your ships have been sunk. Game over!")
             return True
         return False
 
