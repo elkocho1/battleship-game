@@ -54,16 +54,17 @@ class Board:
         else:
             self.grid[row][col] = "#"
 
-    def print_board(self, debug_mode=False):
+    def print_board(self, hide_ships=True):
         """Print the grid with rows and cols"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         for row in range(self.size):
             print(alphabet[row], end=") ")
             for col in range(self.size):
-                if self.grid[row][col] == "O" and not debug_mode:
+                cell = self.grid[row][col]
+                if cell == "O" and hide_ships:
                     print(".", end=" ")
                 else:
-                    print(self.grid[row][col], end=" ")
+                    print(cell, end=" ")
             print("")
 
         print("  ", end=" ")
