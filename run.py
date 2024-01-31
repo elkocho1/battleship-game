@@ -152,7 +152,10 @@ class Game:
         board.update_grid(row, col, hit, ship_present)
         return hit
 
-    def enemy_turn(self)
+    def enemy_turn(self):
+        row, col = random.randint(0, 9), random.randint(0, 9)
+        hit = self.shoot(self.player_board, row, col)
+        print(f"Enemy shoots at {row}, {col}: {'Hit!' if hit else 'Miss.'}")
 
     def is_game_over(self):
         sunk_ships = sum(1 for ship in self.enemy_board.ships if ship.is_sunk())
@@ -180,7 +183,7 @@ class Game:
             row, col = self.get_shot_input()
             self.shoot(self.tracking_board, row, col)
 
-            
+            self.enemy_turn()
 
 game = Game()
 game.play()
