@@ -169,9 +169,14 @@ class Game:
         print("Welcome to my Battleship game")
         print("Board Size ist 10 x 10 and each player has 8 ships.")
         print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
-        self.place_ships()
+        self.place_ships(self.player_board)
+        self.place_ships(self.enemy_board)
+
         while not self.is_game_over():
-            self.board.print_board(debug_mode=False)
+            print("\nYour Board:")
+            self.player_board.print_board(hide_ships=False)
+            print("\nTracking Board:")
+            self.tracking_board.print_board(hide_ships=True)
             print(f"Bullets left: {self.bullets_left}")
             row, col = self.get_shot_input()
             self.shoot(row, col)
