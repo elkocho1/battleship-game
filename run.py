@@ -128,6 +128,22 @@ class Game:
                 print(e)
 
 
+    def shoot(self, row, col):
+        hit = False
+        for ship in self.board.ships:
+            if ship.check_hit(row, col):
+                hit = True
+                if ship.is_sunk():
+                    self.num_of_ships_sunk += 1
+                    print("A ship has been sunk!")
+                else:
+                    print("Hit!")
+                break
+        if not hit:
+            print("Miss.")
+
+
+
     def play(self):
         print("Welcome to my Battleship game")
         print("Board Size ist 10 x 10 and each player has 8 ships.")
