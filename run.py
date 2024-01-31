@@ -156,8 +156,8 @@ class Game:
 
     def enemy_turn(self):
         row, col = random.randint(0, self.player_board.size - 1), random.randint(0, self.player_board.size - 1)
-        print(f"Enemy shoots at ({row}, {col}): ", end= "")
-        hit = self.shoot(self.enemy_board, row, col, is_player_shooting = False)
+        print(f"Enemy shoots at ({row}, {col}): ", end="")
+        hit = self.shoot(self.player_board, row, col, is_player_shooting=False)
         print("Hit!" if hit else "Miss.")
 
     def is_game_over(self):
