@@ -48,11 +48,13 @@ class Board:
                 self.grid[r][c] = "O"
         self.ships.append(ship)
 
-    def update_grid(self, row, col, hit):
-        if hit:
+    def update_grid(self, row, col, hit, ship_present=False):
+        if hit and ship_present:
             self.grid[row][col] = "X"
-        else:
+        elif hit:
             self.grid[row][col] = "#"
+        elif not hit and ship_present:
+            self.grid[row][col] = "O"
 
     def print_board(self, hide_ships=True):
         """Print the grid with rows and cols"""
@@ -132,28 +134,25 @@ class Game:
                 row, col = alphabet.index(shot[0]), int(shot[1])
                 if row >= self.enemy_board.size or col >= self.enemy_board.size:
                     raise ValueError("Shot out of range. Please choose within A-J and 0-9.")
-                if self.board.grid[row][col] in ["X", "#"]:
+                if self.enemy_board.grid[row][col] in ["X", "#"]:
                     raise ValueError("You have already shot here. Choose another target coordinate.")
                 return row, col
             except ValueError as e:
                 print(e)
 
 
-    def shoot(self, row, col):
+    def shoot(self, board, row, col):
         hit = False
-        for ship in self.enemy_board.ships:
+        ship_present = False
+        for ship in board.ships:
             if ship.check_hit(row, col):
                 hit = True
-                if ship.is_sunk():
-                    self.num_of_ships_sunk += 1
-                    print("A ship has been sunk!")
-                else:
-                    print("Hit!")
+                ship_present = True
                 break
-        if not hit:
-            print("Miss.")
-        self.tracking_board.update_grid(row, col, hit)
-        self.bullets_left -= 1
+        board.update_grid(row, col, hit, ship_present)
+        return hit
+
+    def enemy_turn(self)
 
     def is_game_over(self):
         sunk_ships = sum(1 for ship in self.enemy_board.ships if ship.is_sunk())
@@ -179,7 +178,9 @@ class Game:
             self.tracking_board.print_board(hide_ships=True)
             print(f"Bullets left: {self.bullets_left}")
             row, col = self.get_shot_input()
-            self.shoot(row, col)
+            self.shoot(self.tracking_board, row, col)
+
+            
 
 game = Game()
 game.play()
