@@ -48,6 +48,12 @@ class Board:
                 self.grid[r][c] = "O"
         self.ships.append(ship)
 
+    def update_grid(self, row, col, hit):
+        if hit:
+            self.grid[row][col] = "X"
+        else:
+            self.grid[row][col] = "#"
+
     def print_board(self, debug_mode=False):
         """Print the grid with rows and cols"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
