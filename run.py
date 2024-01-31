@@ -58,9 +58,9 @@ class Board:
     def print_board(self, hide_ships=True):
         """Print the grid with rows and cols"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        print("  " + " ".join(str(i) for i in range(self.size)))
+        print(" " + " ".join(str(i) for i in range(self.size)))
         for row in range(self.size):
-            row_display = [self.grid[row][col] if not hide_ships or self.grid[row][col] in ["x", "#"] else "." for col in range(self.size)]
+            row_display = [self.grid[row][col] if not hide_ships or self.grid[row][col] in ["X", "#"] else "." for col in range(self.size)]
             print(alphabet[row] + " " + " ".join(row_display))
             
 
@@ -80,9 +80,9 @@ class Game:
         for i in range(num_of_ships):
             placed = False
             while not placed:
-                row, col = random.randint(0, 9), random.randint(0, 9)
+                row, col = random.randint(0, board.size - 1), random.randint(0, board.size - 1)
                 direction = random.choice(directions)
-                ship_size = random.randint(3, 5)
+                ship_size = random.randint(2, 4)
                 placed = self.try_to_place_ship(board, row, col, direction, ship_size)
 
     def try_to_place_ship(self, board, row, col, direction, length):
@@ -93,7 +93,7 @@ class Game:
         if direction == "left":
             if col - length < 0:
                 return False
-            start_col = col - length + 1
+            start_col = col - length
 
         elif direction == "right":
             if col + length > board.size:
@@ -103,12 +103,17 @@ class Game:
         elif direction == "up":
             if row - length < 0:
                 return False
-            start_row = row - length + 1
+            start_row = row - length
         
         elif direction == "down":
             if row + length > board.size:
                 return False
             end_row = row + length - 1
+
+        for r in range(start_row, end_row + 1):
+            for c in range(start_col, end_col + 1):
+                if board.grid[r][c] == "O":
+                    return False
 
         ship = Ship(start_row, end_row, start_col, end_col)
         board.place_ship(ship)
