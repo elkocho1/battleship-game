@@ -113,6 +113,20 @@ class Game:
         self.board.place_ship(ship)
         return True
 
+    def get_shot_input(self):
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        while True:
+            try:
+                shot = input("Enter row (A-J) and column (0-9) such as A4: ").upper()
+                if len(shot) != 2 or not shot[0].isalpha() or not shot[1].isdigit():
+                    raise ValueError("Invalid input. Please enter in format A4.")
+                row, col = alphabet.index(shot[0]), int(shot[1])
+                if row >= self.board.size or col >= self.board.size:
+                    raise ValueError("Shot out of range. Please choose within A-J and 0-9.")
+                return row, col
+            except ValueError as e:
+                print(e)
+
 
     def play(self):
         print("Welcome to my Battleship game")
@@ -121,6 +135,7 @@ class Game:
         self.place_ships()
 
         self.board.print_board()
+        self.get_shot_input()
 
 game = Game()
 game.play()
