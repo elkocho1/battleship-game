@@ -7,123 +7,6 @@ import random
 """
  Battleship game
 
-
-# Global variables
-grid = [[]]
-grid_size = 10
-num_of_ships = 2
-bullets_left = 50
-game_over = False
-num_of_ships_sunk = 0
-ship_positions = [[]]
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-def check_grid_and_place_ship(start_row, end_row, start_col, end_col):
-    """ Check the row and column to place ships there"""
-    global grid
-    global ship_positions
-
-    all_valid = True
-    for r in range(start_row, end_row):
-        for c in range(start_col, end_col):
-            if grid[r][c] != ".":
-                all_valid = False
-                break
-    if all_valid:
-        ship_positions.append([start_row, end_row, start_col, end_col])
-        for r in range(start_row, end_row):
-            for c in range(start_col, end_col):
-                grid[r][c] = "O"
-    return all_valid
-
-def try_to_place_ship_on_grid(row, col, direction, length):
-    """ Based on direction I place a ship on the grid"""
-    global grid_size
-
-    start_row = row
-    end_row = row + 1
-    start_col = col
-    end_col = col + 1
-
-    if direction == "left":
-        if col - length < 0:
-            return False
-        start_col = col - length + 1
-    
-    elif direction == "right":
-        if col + length >= grid_size:
-            return False
-        end_col = col + length
-
-    elif direction == "up":
-        if row - length < 0:
-            return False
-        start_row = row - length + 1
-
-    elif direction == "down":
-        if row + length >= grid_size:
-            return False
-        end_row = row + length
-
-    return check_grid_and_place_ship(start_row, end_row, start_col, end_col)
-
-
-def create_board():
-    """ Create the grid and randomly place down the ships of different sizes"""
-    global grid
-    global grid_size
-    global num_of_ships
-    global ship_positions
-
-    rows, cols = (grid_size, grid_size)
-
-    grid = []
-    for r in range(rows):
-        row = []
-        for c in range(cols):
-            row.append(".")
-        grid.append(row)
-
-    num_of_ships_placed = 0
-
-    ship_positions = []
-
-    while num_of_ships_placed != num_of_ships:
-        random_row = random.randint(0, rows - 1)
-        random_col = random.randint(0, cols - 1)
-        direction = random.choice(["left", "right", "up", "down"])
-        ship_size = random.randint(3, 5)
-        if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
-            num_of_ships_placed += 1
-    
-
-
-def print_board():
-    """ Print the board with rows and colums"""
-    global grid
-    global alphabet
-
-    debug_mode = True
-
-    alphabet = alphabet[0: len(grid) + 1]
-
-    for row in range(len(grid)):
-        print(alphabet[row], end=") ")
-        for col in range(len(grid[row])):
-            if grid[row][col] == "O":
-                if debug_mode:
-                    print("O", end=" ")
-                else:
-                    print(".", end=" ")
-            else:
-                print(grid[row][col], end=" ")
-        print("")
-
-    print("  ", end=" ")
-    for i in range(len(grid[0])):
-        print(str(i), end=" ")
-    print("")
-
 """
 
 class Ship:
@@ -169,7 +52,14 @@ class Game:
 
     def place_ships(self, num_of_ships=8):
         """Place a specific number of ships randomly on the board"""
-        direction = ["left", "right", "up", "down"]
+        directions = ["left", "right", "up", "down"]
+        for i in range(num_of_ships):
+            placed = False
+            while not placed:
+                row, col = random.randint(0, 9), random.randint(0, 9)
+                direction = random.choice(directions)
+                ship_size = random.randint(3, 5)
+                placed = self.try_to_place_ship(row, col, direction, ship_size)
 
     def try_to_place_ship(self, row, col, direction, length):
         """try to place a ship on the board in a specified direction and length"""
@@ -195,12 +85,15 @@ class Game:
             if row + length > self.board.size:
                 return False
             end_row = row + length - 1
-            
 
-def play():
-    print("Welcome to my Battleship game")
-    print("Board Size ist 10 x 10 and each player has 8 ships.")
-    print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
+        
 
 
-play()
+    def play(self):
+        print("Welcome to my Battleship game")
+        print("Board Size ist 10 x 10 and each player has 8 ships.")
+        print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
+        self.place_ships()
+
+game = Game()
+game.play()
