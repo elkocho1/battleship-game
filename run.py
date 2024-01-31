@@ -149,7 +149,8 @@ class Game:
                 break
         if not hit:
             print("Miss.")
-
+        self.board.update_grid(row, col, hit)
+        self.bullets_left -= 1
 
 
     def play(self):
@@ -158,8 +159,10 @@ class Game:
         print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
         self.place_ships()
 
-        self.board.print_board()
-        self.get_shot_input()
+        self.board.print_board(debug_mode=False)
+        print(f"Bullets left: {self.bullets_left}")
+        row, col = self.get_shot_input()
+        self.shoot(row, col)
 
 game = Game()
 game.play()
