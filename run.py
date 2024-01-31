@@ -18,8 +18,14 @@ class Ship:
         self.end_col = end_col
         self.hits = 0
 
+    def check_hit(self, row, col):
+        if self.start_row <= row <= self.end_row and self.start_col <= col <= self.end_col:
+            self.hits += 1
+            return True
+        return False
+
     def is_sunk(self):
-        return self.hits == self.size
+        return self.hits >= (self.end_row - self.start_row + 1) + (self.end_col - self.start_col + 1)
 
 class Board:
     def __init__(self, size=10):
