@@ -138,7 +138,6 @@ class Game:
 
     def shoot(self, board, row, col, is_player_shooting=True):
         hit = False
-        
         for ship in board.ships:
             if ship.check_hit(row, col):
                 hit = True
@@ -147,13 +146,13 @@ class Game:
         if is_player_shooting:
             self.tracking_board.update_grid(row, col, hit)
         else:
-            board.update_grid(row, col, hit)
+            self.player_board.update_grid(row, col, hit)
         return hit
 
     def enemy_turn(self):
-        row, col = random.randint(0, 9), random.randint(0, 9)
+        row, col = random.randint(0, self.player_board.size - 1), random.randint(0, self.player_board.size - 1)
         print(f"Enemy shoots at ({row}, {col}): ", end="")
-        hit = self.shoot(self.player_board, row, col, False)
+        hit = self.shoot(self.enemy_board, row, col, is_player_shooting = False)
         print("Hit!" if hit else "Miss.")
 
     def is_game_over(self):
