@@ -73,7 +73,9 @@ class Board:
 
 class Game:
     def __init__(self):
-        self.board = Board()
+        self.player_board = Board()
+        self.enemy_board = Board()
+        self.tracking_board = Board()
         self.bullets_left = 50
         self.num_of_ships_sunk = 0
 
