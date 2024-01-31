@@ -51,8 +51,7 @@ class Board:
         if hit:
             self.grid[row][col] = "X"
         else:
-            if self.grid[row][col] != "X":
-                self.grid[row][col] = "#"
+            self.grid[row][col] = "#"
                    
 
     def print_board(self, hide_ships=True):
@@ -124,14 +123,19 @@ class Game:
         while True:
             try:
                 shot = input("Enter row (A-J) and column (0-9) such as A4: ").upper()
-                if len(shot) != 2 or not shot[0].isalpha() or not shot[1].isdigit():
-                    raise ValueError("Invalid input. Please enter in format A4.")
-                row, col = alphabet.index(shot[0]), int(shot[1])
+                if len(shot) < 2 or len(shot) > 3:
+                    raise ValueError("Invalid input length. Please enter in format A4")
+                if shot[0] not in alphabet or not shot[1:].isdigit():
+                    raise ValueError("Invalid input format. Please enter in format A4")
+                row, col = alphabet.index(shot[0]), int(shot[1:])
+
                 if row >= self.enemy_board.size or col >= self.enemy_board.size:
                     raise ValueError("Shot out of range. Please choose within A-J and 0-9.")
+
                 if self.enemy_board.grid[row][col] in ["X", "#"]:
                     raise ValueError("You have already shot here. Choose another target coordinate.")
                 return row, col
+
             except ValueError as e:
                 print(e)
 
@@ -151,7 +155,7 @@ class Game:
 
     def enemy_turn(self):
         row, col = random.randint(0, self.player_board.size - 1), random.randint(0, self.player_board.size - 1)
-        print(f"Enemy shoots at ({row}, {col}): ", end="")
+        print(f"Enemy shoots at ({row}, {col}): ", end= "")
         hit = self.shoot(self.enemy_board, row, col, is_player_shooting = False)
         print("Hit!" if hit else "Miss.")
 
@@ -184,7 +188,7 @@ class Game:
 
             row, col = self.get_shot_input()
             print(f"You shoot at ({row}, {col}): ", end="")
-            if self.shoot(self.enemy_board, row, col):
+            if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
                 print("Hit!")
                 if all(ship.is_sunk() for ship in self.enemy_board.ships):
                     break
