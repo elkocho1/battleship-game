@@ -130,7 +130,7 @@ class Game:
                 if len(shot) != 2 or not shot[0].isalpha() or not shot[1].isdigit():
                     raise ValueError("Invalid input. Please enter in format A4.")
                 row, col = alphabet.index(shot[0]), int(shot[1])
-                if row >= self.board.size or col >= self.board.size:
+                if row >= self.enemy_board.size or col >= self.enemy_board.size:
                     raise ValueError("Shot out of range. Please choose within A-J and 0-9.")
                 if self.board.grid[row][col] in ["X", "#"]:
                     raise ValueError("You have already shot here. Choose another target coordinate.")
@@ -141,7 +141,7 @@ class Game:
 
     def shoot(self, row, col):
         hit = False
-        for ship in self.board.ships:
+        for ship in self.enemy_board.ships:
             if ship.check_hit(row, col):
                 hit = True
                 if ship.is_sunk():
@@ -152,7 +152,7 @@ class Game:
                 break
         if not hit:
             print("Miss.")
-        self.board.update_grid(row, col, hit)
+        self.tracking_board.update_grid(row, col, hit)
         self.bullets_left -= 1
 
     def is_game_over(self):
