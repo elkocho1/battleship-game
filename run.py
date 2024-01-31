@@ -152,6 +152,14 @@ class Game:
         self.board.update_grid(row, col, hit)
         self.bullets_left -= 1
 
+    def is_game_over(self):
+        if self.num_of_ships_sunk == len(self.board.ships):
+            print("Congratulations, you have sunk all the ships!")
+            return True
+        if self.bullets_left <= 0:
+            print("Game over. You have run out of bullets.")
+            return True
+        return False
 
     def play(self):
         print("Welcome to my Battleship game")
