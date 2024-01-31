@@ -104,7 +104,7 @@ class Game:
             start_col = col - length + 1
 
         elif direction == "right":
-            if col + length > self.board.size:
+            if col + length > board.size:
                 return False
             end_col = col + length - 1
         
@@ -114,7 +114,7 @@ class Game:
             start_row = row - length + 1
         
         elif direction == "down":
-            if row + length > self.board.size:
+            if row + length > board.size:
                 return False
             end_row = row + length - 1
 
