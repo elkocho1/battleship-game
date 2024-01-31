@@ -133,16 +133,16 @@ class Game:
 
     def shoot(self, board, row, col, is_player_shooting=True):
         hit = False
-        ship_present = False
+        
         for ship in board.ships:
             if ship.check_hit(row, col):
                 hit = True
-                ship_present = True
+                ship.hits += 1
                 break
         if is_player_shooting:
-            board.update_grid(row, col, hit, False)
+            self.tracking_board.update_grid(row, col, hit)
         else:
-            board.update_grid(row, col, hit, ship_present)
+            board.update_grid(row, col, hit)
         return hit
 
     def enemy_turn(self):
@@ -180,8 +180,10 @@ class Game:
 
             row, col = self.get_shot_input()
             print(f"You shoot at ({row}, {col}): ", end="")
-            if self.shoot(self.tracking_board, row, col):
+            if self.shoot(self.enemy_board, row, col):
                 print("Hit!")
+                if all(ship.is_sunk() for ship in self.enemy_board.ships):
+                    break
             else:
                 print("Miss.")
             self.bullets_left -= 1
