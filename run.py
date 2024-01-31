@@ -19,13 +19,12 @@ class Ship:
         self.hits = 0
 
     def check_hit(self, row, col):
-        if self.start_row <= row <= self.end_row and self.start_col <= col <= self.end_col:
-            self.hits += 1
-            return True
-        return False
+        return self.start_row <= row <= self.end_row and self.start_col <= col <= self.end_col
+        
 
     def is_sunk(self):
-        return self.hits >= (self.end_row - self.start_row + 1) + (self.end_col - self.start_col + 1)
+        length = (self.end_row - self.start_row + 1) + (self.end_col - self.start_col + 1)
+        return self.hits == length
 
 class Board:
     def __init__(self, size=10):
@@ -48,13 +47,13 @@ class Board:
                 self.grid[r][c] = "O"
         self.ships.append(ship)
 
-    def update_grid(self, row, col, hit, ship_present=False):
-        if hit and ship_present:
+    def update_grid(self, row, col, hit):
+        if hit:
             self.grid[row][col] = "X"
-        elif hit:
-            self.grid[row][col] = "#"
-        elif not hit and ship_present:
-            self.grid[row][col] = "O"
+        else:
+            if self.grid[row][col] != "X":
+                self.grid[row][col] = "#"
+                   
 
     def print_board(self, hide_ships=True):
         """Print the grid with rows and cols"""
