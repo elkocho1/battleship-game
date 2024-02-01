@@ -142,16 +142,23 @@ class Game:
 
     def shoot(self, board, row, col, is_player_shooting=True):
         hit = False
+        ship_sunk = False
         for ship in board.ships:
             if ship.check_hit(row, col):
                 hit = True
                 ship.hits += 1
+                if ship.is_sunk():
+                    ship_sunk = True
                 break
         if is_player_shooting:
             self.tracking_board.update_grid(row, col, hit)
             self.enemy_board.update_grid(row, col, hit)
         else:
             self.player_board.update_grid(row, col, hit)
+
+        if ship_sunk and is_player_shooting:
+            print("You destroyed a ship")
+
         return hit
 
     def enemy_turn(self):
