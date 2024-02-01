@@ -156,8 +156,11 @@ class Game:
         else:
             self.player_board.update_grid(row, col, hit)
 
-        if ship_sunk and is_player_shooting:
-            print("You destroyed a ship")
+        if ship_sunk:
+            if is_player_shooting:
+                print("You destroyed a ship")
+            else:
+                print("The enemy destroyed 1 of your ships")
 
         return hit
 
