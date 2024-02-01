@@ -2,6 +2,8 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+"""Import the random module for generating random values"""
+
 import random
 
 """
@@ -19,10 +21,12 @@ class Ship:
         self.hits = 0
 
     def check_hit(self, row, col):
+        """Check if a ship has been hit at the specified row and column"""
         return self.start_row <= row <= self.end_row and self.start_col <= col <= self.end_col
         
 
     def is_sunk(self):
+        """Check if a ship is sunk"""
         length = (self.end_row - self.start_row + 1) * (self.end_col - self.start_col + 1)
         return self.hits == length
 
@@ -38,8 +42,6 @@ class Board:
             self.grid.append(row_data)
         self.ships = []
 
-    #add methods for placing ships, checking hits
-
     def place_ship(self, ship):
         """Place ship and mark its position"""
         for r in range(ship.start_row, ship.end_row + 1):
@@ -48,6 +50,7 @@ class Board:
         self.ships.append(ship)
 
     def update_grid(self, row, col, hit):
+        """update the game board grid with X for hits and # for misses"""
         if hit:
             self.grid[row][col] = "X"
         else:
@@ -55,7 +58,7 @@ class Board:
                    
 
     def print_board(self, hide_ships=True):
-        """Print the grid with rows and cols"""
+        """Print the grid with rows and cols and hiding ships if specified"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         print(" " + " ".join(str(i) for i in range(self.size)))
         for row in range(self.size):
@@ -65,13 +68,11 @@ class Board:
 
 class Game:
     def __init__(self):
+        """Initialize the game with player, enemy and tracking board and bullet amount"""
         self.player_board = Board()
         self.enemy_board = Board()
         self.tracking_board = Board()
         self.bullets_left = 50
-        
-
-    #add methods for game loop, shooting and game over
 
     def place_ships(self, board, num_of_ships=8):
         """Place a specific number of ships randomly on the board"""
@@ -119,6 +120,7 @@ class Game:
         return True
 
     def get_shot_input(self):
+        """Get the players input for a shot"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         while True:
             try:
@@ -141,6 +143,7 @@ class Game:
 
 
     def shoot(self, board, row, col, is_player_shooting=True):
+        """Shoot at a specified position on the board and handle hits and misses"""
         hit = False
         ship_sunk = False
         for ship in board.ships:
@@ -165,12 +168,14 @@ class Game:
         return hit
 
     def enemy_turn(self):
+        """Simulate the enemys turn by shooting at a random position on the player"""
         row, col = random.randint(0, self.player_board.size - 1), random.randint(0, self.player_board.size - 1)
         print(f"Enemy shoots at ({row}, {col}): ", end="")
         hit = self.shoot(self.player_board, row, col, is_player_shooting=False)
         print("Hit!" if hit else "Miss.")
 
     def is_game_over(self):
+        """Check if the game is over based on bullets left or ship status"""
         if self.bullets_left <= 0:
             print("Game over. You have run out of bullets.")
             return True
@@ -183,6 +188,7 @@ class Game:
         return False
 
     def get_player_name(self):
+        """Get the players name with validation"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         while True:
             try:
@@ -197,6 +203,7 @@ class Game:
 
 
     def play(self):
+        """Start and loop the game"""
         print("Battleship Python Game!")
         print("Board Size ist 10 x 10 and each player has 8 ships.")
         print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n")
@@ -223,6 +230,8 @@ class Game:
             
             if not self.is_game_over():
                 self.enemy_turn()
+
+"""Call the game when programm runs"""
 
 game = Game()
 game.play()
