@@ -60,7 +60,7 @@ class Board:
     def print_board(self, hide_ships=True):
         """Print the grid with rows and cols and hiding ships if specified"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        print(" " + " ".join(str(i) for i in range(self.size)))
+        print("  " + " ".join(str(i) for i in range(self.size)))
         for row in range(self.size):
             row_display = [self.grid[row][col] if not hide_ships or self.grid[row][col] in ["X", "#"] else "." for col in range(self.size)]
             print(alphabet[row] + " " + " ".join(row_display))
