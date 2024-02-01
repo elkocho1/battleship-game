@@ -182,15 +182,32 @@ class Game:
             return True
         return False
 
+    def get_player_name(self):
+        alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        while True:
+            try:
+                player_name = input("Please enter your user name: \n")
+                if len(player_name) > 20:
+                    raise ValueError("Your name cannot be longer than 20 characters! Please try again. ")
+                if not all(char in alphabet for char in player_name):
+                    raise ValueError("Your name can only include letters and numbers. Please try again. ")
+                return player_name
+            except ValueError as e:
+                print(e)
+
+
     def play(self):
-        print("Welcome to my Battleship game")
+        print("Battleship Python Game!")
         print("Board Size ist 10 x 10 and each player has 8 ships.")
-        print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.")
+        print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n")
+
+        player_name = self.get_player_name()
+
         self.place_ships(self.player_board)
         self.place_ships(self.enemy_board)
 
         while not self.is_game_over():
-            print("\nPlayer Board:")
+            print(f"\n{player_name}'s Board:")
             self.player_board.print_board(hide_ships=False)
             print("\nComputer Board:")
             self.tracking_board.print_board(hide_ships=True)
