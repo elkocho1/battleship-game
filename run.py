@@ -119,12 +119,19 @@ class Game:
         board.place_ship(ship)
         return True
 
+    def quit_game(self):
+        """quit the game"""
+        print("You have chosen to quite the game. Thanks for playing!")
+        exit()      
+
     def get_shot_input(self):
         """Get the players input for a shot"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         while True:
             try:
-                shot = input("Enter row (A-J) and column (0-9) such as A4: \n").upper()
+                shot = input("Enter row (A-J) and column (0-9) such as A4, or 'Q' to quit the game: \n").upper()
+                if shot == "Q":
+                    self.quit_game()
                 if len(shot) < 2 or len(shot) > 3:
                     raise ValueError("Invalid input length. Please enter in format A4")
                 if shot[0] not in alphabet or not shot[1:].isdigit():
