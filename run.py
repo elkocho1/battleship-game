@@ -122,7 +122,7 @@ class Game:
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         while True:
             try:
-                shot = input("Enter row (A-J) and column (0-9) such as A4: ").upper()
+                shot = input("Enter row (A-J) and column (0-9) such as A4: \n").upper()
                 if len(shot) < 2 or len(shot) > 3:
                     raise ValueError("Invalid input length. Please enter in format A4")
                 if shot[0] not in alphabet or not shot[1:].isdigit():
@@ -180,9 +180,9 @@ class Game:
         self.place_ships(self.enemy_board)
 
         while not self.is_game_over():
-            print("\nYour Board:")
+            print("\nPlayer Board:")
             self.player_board.print_board(hide_ships=False)
-            print("\nTracking Board:")
+            print("\nComputer Board:")
             self.tracking_board.print_board(hide_ships=True)
             print(f"Bullets left: {self.bullets_left}")
 
