@@ -194,7 +194,7 @@ class Game:
                 if len(player_name) > 20:
                     raise ValueError("Your name cannot be longer than 20 characters! Please try again. ")
                 if len(player_name) < 1:
-                    raise ValueError("Your name must contain at least 1 character! Please try again. ")
+                    raise ValueError("Your name must contain at least 1 characters! Please try again. ")
                 if not all(char in alphabet for char in player_name):
                     raise ValueError("Your name can only include letters and numbers. Please try again. ")
                 return player_name
@@ -203,9 +203,17 @@ class Game:
 
     def play(self):
         """Start and loop the game"""
-        print("Battleship Python Game!")
-        print("Board Size ist 10 x 10 and each player has 8 ships.")
-        print("You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n")
+        welcome_message = (
+            "Battleship Python Game!\n"
+            "Board Size ist 10 x 10 and each player has 8 ships.\n"
+            "You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n"
+            "This is the legend:\n"
+            "# means Miss!\n"
+            "X means Hit!\n"
+            ". means Water!\n"
+            "O are your ships!\n"
+        )
+        print(welcome_message)
 
         player_name = self.get_player_name()
 
@@ -220,7 +228,7 @@ class Game:
             print(f"Bullets left: {self.bullets_left}")
 
             row, col = self.get_shot_input()
-            print(f"You shoot at ({row}, {col}): ", end="")
+            print(f"\nYou shoot at ({row}, {col}): ", end="")
             if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
                 print("Hit!")
             else:
