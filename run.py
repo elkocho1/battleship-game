@@ -188,9 +188,13 @@ class Game:
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
         while True:
             try:
-                player_name = input("Please enter your user name: \n")
+                player_name = input("Please enter your user name: \n").strip()
+                if not player_name:
+                    raise ValueError("Your name cannot be empty or use spaces! Please try again. ")
                 if len(player_name) > 20:
                     raise ValueError("Your name cannot be longer than 20 characters! Please try again. ")
+                if len(player_name) < 1:
+                    raise ValueError("Your name must contain at least 1 character! Please try again. ")
                 if not all(char in alphabet for char in player_name):
                     raise ValueError("Your name can only include letters and numbers. Please try again. ")
                 return player_name
