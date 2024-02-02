@@ -63,6 +63,8 @@ class Game:
         self.enemy_board = Board()
         self.tracking_board = Board()
         self.bullets_left = 50
+        self.player_ships_sunk = 0
+        self.enemy_ships_sunk = 0
 
     def place_ships(self, board, num_of_ships=8):
         """Place a specific number of ships randomly on the board"""
@@ -148,6 +150,10 @@ class Game:
                 ship.hits += 1
                 if ship.is_sunk():
                     ship_sunk = True
+                    if is_player_shooting:
+                        self.player_ships_sunk += 1
+                    else:
+                        self.enemy_ships_sunk += 1
                 break
         if is_player_shooting:
             self.tracking_board.update_grid(row, col, hit)
@@ -245,11 +251,14 @@ class Game:
                 print("\nComputers Final Board:")
                 self.tracking_board.print_board(hide_ships=True)
                 if self.bullets_left <= 0:
-                    print("You have used your last bullet")
+                    print("You have used your last bullet \n")
                 if all(ship.is_sunk() for ship in self.enemy_board.ships):
-                    print("Congratulations, you have sunk all the ships!")
-                if all(ship.is_sunk() for ship in self.player_board.ships):
-                    print("Sorry, all your ships have been sunk. Game over!")
+                    print("Congratulations, you have sunk all the ships! \n")
+                elif all(ship.is_sunk() for ship in self.player_board.ships):
+                    print("Sorry, all your ships have been sunk. Game over! \n")
+                else:
+                    print(f"You sunk {self.player_ships_sunk} of the enemys ships. \n")
+                    print(f"The enemy sunk {self.enemy_ships_sunk} of your ships. \n")
                 break
 """Call the game when programm runs"""
 
