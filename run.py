@@ -1,6 +1,7 @@
 """Import the random module for generating random values"""
 
 import random
+import os
 
 
 class Ship:
@@ -121,7 +122,7 @@ class Game:
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         while True:
             try:
-                shot = input("Enter row (A-J) and column (0-9) such as A4, or 'Q' to quit the game: \n").upper()
+                shot = input("\nEnter row (A-J) and column (0-9) such as A4, or 'Q' to quit the game: \n").upper()
                 if shot == "Q":
                     self.quit_game()
                 if len(shot) < 2 or len(shot) > 3:
@@ -215,7 +216,14 @@ class Game:
             return False
         else:
             print("Invalid input. Please answer 'yes' or 'no'. ")
-            return self.ask_play_again()            
+            return self.ask_play_again()       
+
+    def clear_screen(self):
+        """Clear te screen"""
+        if os.name == "nt":
+            _ = os.system("cls")
+        else:
+            _ = os.system("clear")   
 
     def play(self):
         """Start and loop the game"""
@@ -233,7 +241,7 @@ class Game:
             print(welcome_message)
 
             player_name = self.get_player_name()
-
+            self.clear_screen()
             self.player_board = Board()
             self.enemy_board = Board()
             self.tracking_board = Board()
@@ -245,11 +253,12 @@ class Game:
             self.place_ships(self.enemy_board)
 
             while not self.is_game_over():
+                
                 print(f"\n{player_name}'s Board:")
                 self.player_board.print_board(hide_ships=False)
                 print("\nComputer Board:")
                 self.tracking_board.print_board(hide_ships=True)
-                print(f"Bullets left: {self.bullets_left}")
+                print(f"\nBullets left: {self.bullets_left}")
 
                 if self.bullets_left > 0:
                     row, col = self.get_shot_input()
