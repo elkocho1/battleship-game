@@ -5,6 +5,20 @@ import os
 
 
 class Ship:
+    """
+    Represents a ship in the game with a specific position on the board.
+
+    Attributes:
+        start_row (int): The starting row of the ship on the board.
+        end_row (int): The ending row of the ship on the board.
+        start_col (int): The starting column of the ship on the board.
+        end_col (int): The ending column of the ship on the board.
+        hits (int): The number of hits the ship has taken.
+
+    Methods:
+        check_hit(row, col): Returns True if the given row and column hit the ship.
+        is_sunk(): Returns True if the ship is sunk (hits equal to its size).
+    """
     def __init__(self, start_row, end_row, start_col, end_col):
         """classificate a ship with its position and hit counts"""
         self.start_row = start_row
@@ -23,6 +37,19 @@ class Ship:
         return self.hits == length
 
 class Board:
+     """
+    Represents the game board in the game, holding ships and tracking shots.
+    
+    Attributes:
+        size (int): The size of the game board (number of rows and columns).
+        grid (list of lists): The game board grid, representing ship positions and shot results.
+        ships (list): A list of Ship objects placed on the board.
+        
+    Methods:
+        place_ship(ship): Places a ship on the board.
+        update_grid(row, col, hit): Updates the grid based on shot results (hit or miss).
+        print_board(hide_ships=True): Prints the board to the console, optionally hiding ships.
+    """
     def __init__(self, size=10):
         """initialize the board with a given size"""
         self.size = size
@@ -58,6 +85,30 @@ class Board:
             
 
 class Game:
+    """
+    Manages the game, including setting up the board, handling player input,
+    and executing the game loop.
+    
+    Attributes:
+        player_board (Board): The player's game board.
+        enemy_board (Board): The enemy's (computer's) game board.
+        tracking_board (Board): Used by the player to track shots against the enemy.
+        bullets_left (int): The number of shots the player has remaining.
+        player_ships_sunk (int): The number of enemy ships sunk by the player.
+        enemy_ships_sunk (int): The number of player's ships sunk by the enemy.
+        
+    Methods:
+        place_ships(board, num_of_ships): Randomly places ships on the given board.
+        try_to_place_ship(board, row, col, direction, length): Attempts to place a ship on the board.
+        quit_game(): Exits the game.
+        get_shot_input(): Gets the player's shot input.
+        shoot(board, row, col, is_player_shooting): Processes a shot at the given position.
+        enemy_turn(): Simulates the enemy's turn.
+        is_game_over(): Checks if the game is over.
+        get_player_name(): Gets the player's name with validation.
+        ask_play_again(): Asks the player if they want to play again.
+        play(): Starts and manages the game loop.
+    """
     def __init__(self):
         """Initialize the game with player, enemy and tracking board and bullet amount"""
         self.player_board = Board()
