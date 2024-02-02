@@ -227,17 +227,30 @@ class Game:
             self.tracking_board.print_board(hide_ships=True)
             print(f"Bullets left: {self.bullets_left}")
 
-            row, col = self.get_shot_input()
-            print(f"\nYou shoot at ({row}, {col}): ", end="")
-            if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
-                print("Hit!")
-            else:
-                print("Miss.")
-            self.bullets_left -= 1
-            
-            if not self.is_game_over():
+            if self.bullets_left > 0:
+                row, col = self.get_shot_input()
+                print(f"\nYou shoot at ({row}, {col}): ", end="")
+                if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
+                    print("Hit!")
+                else:
+                    print("Miss.")
+                self.bullets_left -= 1
+
+            if self.bullets_left >= 0:
                 self.enemy_turn()
 
+            if self.bullets_left <= 0 or self.is_game_over():
+                print(f"\n{player_name}'s Final Board:")
+                self.player_board.print_board(hide_ships=False)
+                print("\nComputers Final Board:")
+                self.tracking_board.print_board(hide_ships=True)
+                if self.bullets_left <= 0:
+                    print("You have used your last bullet")
+                if all(ship.is_sunk() for ship in self.enemy_board.ships):
+                    print("Congratulations, you have sunk all the ships!")
+                if all(ship.is_sunk() for ship in self.player_board.ships):
+                    print("Sorry, all your ships have been sunk. Game over!")
+                break
 """Call the game when programm runs"""
 
 game = Game()
