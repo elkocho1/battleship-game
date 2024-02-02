@@ -207,59 +207,83 @@ class Game:
             except ValueError as e:
                 print(e)
 
+    def ask_play_again(self):
+        response = input("Would you like to play again? \n").strip().lower()
+        if response == "yes":
+            return True
+        elif response == "no":
+            return False
+        else:
+            print("Invalid input. Please answer 'yes' or 'no'. ")
+            return self.ask_play_again()            
+
     def play(self):
         """Start and loop the game"""
-        welcome_message = (
-            "Battleship Python Game!\n"
-            "Board Size ist 10 x 10 and each player has 8 ships.\n"
-            "You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n"
-            "This is the legend:\n"
-            "# means Miss!\n"
-            "X means Hit!\n"
-            ". means Water!\n"
-            "O are your ships!\n"
-        )
-        print(welcome_message)
+        while True:
+            welcome_message = (
+                "Battleship Python Game!\n"
+                "Board Size ist 10 x 10 and each player has 8 ships.\n"
+                "You have in total 50 bullets to take down the enemy ships. Each round the amount will be updated and the hits and misses are getting displayed.\n"
+                "This is the legend:\n"
+                "# means Miss!\n"
+                "X means Hit!\n"
+                ". means Water!\n"
+                "O are your ships!\n"
+            )
+            print(welcome_message)
 
-        player_name = self.get_player_name()
+            player_name = self.get_player_name()
 
-        self.place_ships(self.player_board)
-        self.place_ships(self.enemy_board)
+            self.player_board = Board()
+            self.enemy_board = Board()
+            self.tracking_board = Board()
+            self.bullets_left = 50
+            self.player_ships_sunk = 0
+            self.enemy_ships_sunk = 0
 
-        while not self.is_game_over():
-            print(f"\n{player_name}'s Board:")
-            self.player_board.print_board(hide_ships=False)
-            print("\nComputer Board:")
-            self.tracking_board.print_board(hide_ships=True)
-            print(f"Bullets left: {self.bullets_left}")
+            self.place_ships(self.player_board)
+            self.place_ships(self.enemy_board)
 
-            if self.bullets_left > 0:
-                row, col = self.get_shot_input()
-                print(f"\nYou shoot at ({row}, {col}): ", end="")
-                if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
-                    print("Hit!")
-                else:
-                    print("Miss.")
-                self.bullets_left -= 1
-
-            if self.bullets_left >= 0:
-                self.enemy_turn()
-
-            if self.bullets_left <= 0 or self.is_game_over():
-                print(f"\n{player_name}'s Final Board:")
+            while not self.is_game_over():
+                print(f"\n{player_name}'s Board:")
                 self.player_board.print_board(hide_ships=False)
-                print("\nComputers Final Board:")
+                print("\nComputer Board:")
                 self.tracking_board.print_board(hide_ships=True)
-                if self.bullets_left <= 0:
-                    print("You have used your last bullet \n")
-                if all(ship.is_sunk() for ship in self.enemy_board.ships):
-                    print("Congratulations, you have sunk all the ships! \n")
-                elif all(ship.is_sunk() for ship in self.player_board.ships):
-                    print("Sorry, all your ships have been sunk. Game over! \n")
-                else:
-                    print(f"You sunk {self.player_ships_sunk} of the enemys ships. \n")
-                    print(f"The enemy sunk {self.enemy_ships_sunk} of your ships. \n")
+                print(f"Bullets left: {self.bullets_left}")
+
+                if self.bullets_left > 0:
+                    row, col = self.get_shot_input()
+                    print(f"\nYou shoot at ({row}, {col}): ", end="")
+                    if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
+                        print("Hit!")
+                    else:
+                        print("Miss.")
+                    self.bullets_left -= 1
+
+                if self.bullets_left >= 0:
+                    self.enemy_turn()
+
+                
+            print(f"\n{player_name}'s Final Board:")
+            self.player_board.print_board(hide_ships=False)
+            print("\nComputers Final Board:")
+            self.tracking_board.print_board(hide_ships=True)
+            if self.bullets_left <= 0:
+                print("You have used your last bullet \n")
+            if all(ship.is_sunk() for ship in self.enemy_board.ships):
+                print("Congratulations, you have sunk all the ships! \n")
+            elif all(ship.is_sunk() for ship in self.player_board.ships):
+                print("Sorry, all your ships have been sunk. Game over! \n")
+            else:
+                print(f"You sunk {self.player_ships_sunk} of the enemys ships. \n")
+                print(f"The enemy sunk {self.enemy_ships_sunk} of your ships. \n")
+            
+            if not self.ask_play_again():
+                print("Thanks for playing! Exiting the game now...")
                 break
+            else:
+                print("Restarting now ....")
+
 """Call the game when programm runs"""
 
 game = Game()
