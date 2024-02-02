@@ -1,15 +1,7 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
 """Import the random module for generating random values"""
 
 import random
 
-"""
- Battleship game
-
-"""
 
 class Ship:
     def __init__(self, start_row, end_row, start_col, end_col):
@@ -23,7 +15,6 @@ class Ship:
     def check_hit(self, row, col):
         """Check if a ship has been hit at the specified row and column"""
         return self.start_row <= row <= self.end_row and self.start_col <= col <= self.end_col
-        
 
     def is_sunk(self):
         """Check if a ship is sunk"""
@@ -56,7 +47,6 @@ class Board:
         else:
             self.grid[row][col] = "#"
                    
-
     def print_board(self, hide_ships=True):
         """Print the grid with rows and cols and hiding ships if specified"""
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -148,7 +138,6 @@ class Game:
             except ValueError as e:
                 print(e)
 
-
     def shoot(self, board, row, col, is_player_shooting=True):
         """Shoot at a specified position on the board and handle hits and misses"""
         hit = False
@@ -207,7 +196,6 @@ class Game:
                 return player_name
             except ValueError as e:
                 print(e)
-
 
     def play(self):
         """Start and loop the game"""
