@@ -31,3 +31,19 @@ Users the classic battleship game and try to win against the computer. In total 
 
 * As a Frequent User, I want to be able to win the game and use it on my phone.
 * As a Frequent User, I want the game to be difficult. 
+
+---
+
+## Features
+
+**When the program is loaded**
+
+* The user can see a welcoming message which engages to start playing and the polite question to enter the user name:
+
+![Welcome to the game](documentation/features-welcome.png)
+
+* When the user enters its name, the game shows the 2 players board. 
+* On the player board the player can see the location of its ships.
+* On the computers board the player only sees the water marks
+* Futher more the player can see the amount of bullets. 
+* Last but not least the input field to place the shot coordinates. 
