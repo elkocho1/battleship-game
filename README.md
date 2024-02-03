@@ -55,3 +55,6 @@ Users the classic battleship game and try to win against the computer. In total 
 * After each shot input the shot will be displayed on either the player board or enemy board.
 * Each shot represents either a hit "X" or a miss "#".
 ![Hits and Miss](documentation/hits-miss.png)
+* As soon as the game is over the player reseaves a message that all the bullets are out.
+* Furthermore, the amounts of ships that the player and the computer sunk are displayed. 
+![End-Message](documentation/end-message.png)
