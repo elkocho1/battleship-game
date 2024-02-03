@@ -260,7 +260,7 @@ class Game:
                 print(e)
 
     def ask_play_again(self):
-        response = input("Would you like to play again? \n").strip().lower()
+        response = input("Would you like to play again (yes/no)? \n").strip().lower()
         if response == "yes":
             return True
         elif response == "no":
@@ -330,7 +330,7 @@ class Game:
             print("\nComputers Final Board:")
             self.tracking_board.print_board(hide_ships=True)
             if self.bullets_left <= 0:
-                print("You have used your last bullet \n")
+                print("Game over.You have used your last bullet \n")
             if all(ship.is_sunk() for ship in self.enemy_board.ships):
                 print("Congratulations, you have sunk all the ships! \n")
             elif all(ship.is_sunk() for ship in self.player_board.ships):
@@ -341,6 +341,8 @@ class Game:
             
             if not self.ask_play_again():
                 print("Thanks for playing! Exiting the game now...")
+                self.clear_screen()
+                print("Thank you for being with us!)
                 break
             else:
                 print("Restarting now ....")
