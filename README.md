@@ -172,10 +172,18 @@ Create a local copy of the GitHub repository by following one of the two process
 
 - Download ZIP file:
   1. Go to the [GitHub Repo page](https://github.com/elkocho1/battleship-game.git).
-  1. Click the Code button and download the ZIP file containing the project.
-  1. Extract the ZIP file to a location on your PC.
+  2. Click the Code button and download the ZIP file containing the project.
+  3. Extract the ZIP file to a location on your PC.
 
 - Clone the repository:
   1. Open a folder on your computer with the terminal.
-  1. Run the following command
+  2. Run the following command
   - `git clone https://github.com/elkocho1/battleship-game.git`
+
+---
+
+## Credit
+
+- The inspiration for the game funtion comes from [Python Curriculum](Battleships/battleships_complete.py), they designed the game as a single player mode and was the orientation for my project logic
+
+---
