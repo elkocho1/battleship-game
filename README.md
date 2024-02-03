@@ -2,6 +2,8 @@
 
 ![Responsive Mock Up](documentation/mock-up-responsive.png)
 
+The program can be reached by the [link](https://michaels-battleship-game-d48b393c746c.herokuapp.com/)
+
 The game is a Python terminal project whose primary purpose is to have fun and play it.
 
 Users the classic battleship game and try to win against the computer. In total you play 50 rounds max, and u have to sunk 8 ships from the enemy. 
@@ -138,3 +140,42 @@ Other users also tested it in order to spot possible mistakes that the code may 
 No errors were found:
 
 ![Validation](documentation/validation.png)
+
+---
+
+## Deployment
+
+- The program was deployed to [Heroku](https://dashboard.heroku.com).
+- The program can be reached by the [link](https://michaels-battleship-game-d48b393c746c.herokuapp.com/)
+
+![Deployed Version](documentation/deploy.png)
+
+### To deploy the project with heroku:
+
+- Steps for deployment:
+1. Fork or clone this repository
+2. Create a new Heroku app
+3. Set the buildbacks to **Python** and **NodeJs** in that order
+4. Link the Heroku app to the repository
+5. Click on deploy manually
+
+### To deploy the project as an application that can be **run locally**:
+
+*Note:*
+  1. This project requires you to have Python installed on your local PC:
+  - `sudo apt install python3`
+
+  2. You will also need pip installed to allow the installation of modules the application uses.
+  - `sudo apt install python3-pip`
+
+Create a local copy of the GitHub repository by following one of the two processes below:
+
+- Download ZIP file:
+  1. Go to the [GitHub Repo page](https://github.com/elkocho1/battleship-game.git).
+  1. Click the Code button and download the ZIP file containing the project.
+  1. Extract the ZIP file to a location on your PC.
+
+- Clone the repository:
+  1. Open a folder on your computer with the terminal.
+  1. Run the following command
+  - `git clone https://github.com/elkocho1/battleship-game.git`
