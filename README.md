@@ -61,3 +61,29 @@ Users the classic battleship game and try to win against the computer. In total 
 * After this message, the player can choose to quit the game or restart the game.
 * "No" will exit the game and leave a thank you message.
 * "Yes" will restart the game
+
+---
+
+## Technologies Used
+
+### Languages:
+
+- [Python 3.12.1](https://www.python.org/downloads/release/python-3121/): used to anchor the project and direct all application behavior
+
+### Frameworks/Libraries, and Tools:
+#### Python modules:
+
+##### Standard library imports:
+- [random](https://docs.python.org/3/library/random.html) was used to implement pseudo-random number generation.
+- [os](https://docs.python.org/3/library/os.html ) was used to clear the terminal before and after running the program.
+
+##### Third-party imports:
+- None.
+
+#### Other tools:
+- [Codeanywhere](https://codeanywhere.com/) was used as the main tool to write and edit code.
+- [Git](https://git-scm.com/) was used for the version control of the website.
+- [GitHub](https://github.com/) was used to host the code of the website.
+- [Canva](https://www.canva.com/) was used to make and resize images for the README file.
+- [Heroku](https://www.heroku.com/) was used to deploy the project.
+
