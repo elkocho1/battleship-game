@@ -47,3 +47,7 @@ Users the classic battleship game and try to win against the computer. In total 
 * On the computers board the player only sees the water marks
 * Futher more the player can see the amount of bullets. 
 * Last but not least the input field to place the shot coordinates. 
+* Input validation and error checking
+    * You cannot enter coordinates outside the size of the grid
+    * You must enter in a specific format like A4
+    * You cannot enter the same coordinates twice
