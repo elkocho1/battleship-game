@@ -58,3 +58,6 @@ Users the classic battleship game and try to win against the computer. In total 
 * As soon as the game is over the player reseaves a message that all the bullets are out.
 * Furthermore, the amounts of ships that the player and the computer sunk are displayed. 
 ![End-Message](documentation/end-message.png)
+* After this message, the player can choose to quit the game or restart the game.
+* "No" will exit the game and leave a thank you message.
+* "Yes" will restart the game
