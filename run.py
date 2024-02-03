@@ -198,6 +198,7 @@ class Game:
 
     def quit_game(self):
         """quit the game"""
+        self.clear_screen()
         print("You have chosen to quite the game. Thanks for playing!")
         exit()
 
