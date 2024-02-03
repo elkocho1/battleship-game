@@ -60,7 +60,7 @@ class Board:
                 row_data.append(".")
             self.grid.append(row_data)
         self.ships = []
-        
+
     def place_ship(self, ship):
         """Place ship and mark its position"""
         for r in range(ship.start_row, ship.end_row + 1):
@@ -313,6 +313,7 @@ class Game:
 
                 if self.bullets_left > 0:
                     row, col = self.get_shot_input()
+                    print("-----------------------------------------")
                     print(f"\nYou shoot at ({row}, {col}): ", end="")
                     if self.shoot(self.enemy_board, row, col, is_player_shooting=True):
                         print("Hit!")
