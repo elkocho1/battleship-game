@@ -347,7 +347,8 @@ class Game:
             else:
                 print("Restarting now ....")
 
-"""Call the game when programm runs"""
 
-game = Game()
-game.play()
+if __name__ == "__main__":
+    """Call the game when programm runs"""
+    game = Game()
+    game.play()
