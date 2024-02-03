@@ -37,7 +37,7 @@ class Ship:
         return self.hits == length
 
 class Board:
-     """
+    """
     Represents the game board in the game, holding ships and tracking shots.
     
     Attributes:
@@ -60,7 +60,7 @@ class Board:
                 row_data.append(".")
             self.grid.append(row_data)
         self.ships = []
-
+        
     def place_ship(self, ship):
         """Place ship and mark its position"""
         for r in range(ship.start_row, ship.end_row + 1):
