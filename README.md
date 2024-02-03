@@ -10,9 +10,9 @@ Users the classic battleship game and try to win against the computer. In total 
 
 ## How to play: 
 
-    -Open the game with this URL: https://michaels-battleship-game-d48b393c746c.herokuapp.com/ in your browser
-    -As soon as the page is loaded, click "Run Program".
-    -Introduce yourself to the program. 
-    -Now see your board and the computer board.
-    -Enter your shot coordinates.
-    -Play as many round as u finish.
+1. Open the game with this URL: https://michaels-battleship-game-d48b393c746c.herokuapp.com/ in your browser
+2. As soon as the page is loaded, click "Run Program".
+3. Introduce yourself to the program. 
+4. Now see your board and the computer board.
+5. Enter your shot coordinates.
+6. Play as many round as u finish.
