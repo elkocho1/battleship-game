@@ -87,3 +87,38 @@ Users the classic battleship game and try to win against the computer. In total 
 - [Canva](https://www.canva.com/) was used to make and resize images for the README file.
 - [Heroku](https://www.heroku.com/) was used to deploy the project.
 
+---
+
+Bugs
+
+**Solved Bugs**
+
+1. Fix bug to display enemy shot on the player board tool
+- Solution: change the board from "enemy_board" parameter to "player_board" parameter in the enemy_turn method
+```
+        "from this"
+   def enemy_turn(self):
+        row, col = random.randint(0, self.player_board.size - 1), random.randint(0, self.player_board.size - 1)
+        print(f"Enemy shoots at ({row}, {col}): ", end= "")
+        hit = self.shoot(self.enemy_board, row, col, is_player_shooting = False) 
+
+        "to this"
+
+        print(f"Enemy shoots at ({row}, {col}): ", end="")
+        hit = self.shoot(self.player_board, row, col, is_player_shooting=False)
+        print("Hit!" if hit else "Miss.")
+```
+
+2. Fix bug so the ships are not overlapping and cannot be placed twice on the board
+- Solution add the following nested loop in the try_to_place_ship method
+```
+for r in range(start_row, end_row + 1):
+            for c in range(start_col, end_col + 1):
+                if board.grid[r][c] == "O":
+                    return False
+```
+
+
+**Unsolved bugs**
+
+- None
