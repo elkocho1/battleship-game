@@ -122,3 +122,19 @@ for r in range(start_row, end_row + 1):
 **Unsolved bugs**
 
 - None
+
+---
+
+## Testing
+
+The program was tested constantly during its development process.
+Other users also tested it in order to spot possible mistakes that the code may present.
+
+### Validation
+
+* PEPE8 Python Validator [online validation tool](https://pep8ci.herokuapp.com/) was used to ensure that all the code is correct. 
+* This validation was done manually by copying python code and pasting it into the validator.
+
+No errors were found:
+
+![Validation]()
