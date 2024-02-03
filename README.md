@@ -52,3 +52,6 @@ Users the classic battleship game and try to win against the computer. In total 
     * You must enter in a specific format like A4
     * You cannot enter the same coordinates twice
 ![Error Messages](documentation/error-message.png)
+* After each shot input the shot will be displayed on either the player board or enemy board.
+* Each shot represents either a hit "X" or a miss "#".
+![Hits and Miss](documentation/hits-miss.png)
