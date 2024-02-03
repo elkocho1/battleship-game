@@ -137,4 +137,4 @@ Other users also tested it in order to spot possible mistakes that the code may 
 
 No errors were found:
 
-![Validation]()
+![Validation](documentation/validation.png)
