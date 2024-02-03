@@ -187,3 +187,8 @@ Create a local copy of the GitHub repository by following one of the two process
 - The inspiration for the game funtion comes from [Python Curriculum](Battleships/battleships_complete.py), they designed the game as a single player mode and was the orientation for my project logic
 
 ---
+
+## Acknowledgemnt
+
+- [Juliia Konovalova](https://github.com/IuliiaKonovalova) is my mentor who keeps my journey alive and im so thankful for her help.
+- [Python Curriculum](https://github.com/SaranSundar/PythonCurriculum) these projects help me learn more about python and give me a deeper practical introduction
