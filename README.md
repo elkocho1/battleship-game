@@ -51,3 +51,4 @@ Users the classic battleship game and try to win against the computer. In total 
     * You cannot enter coordinates outside the size of the grid
     * You must enter in a specific format like A4
     * You cannot enter the same coordinates twice
+![Error Messages](documentation/error-message.png)
