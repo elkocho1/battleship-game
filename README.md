@@ -91,7 +91,7 @@ Users the classic battleship game and try to win against the computer. In total 
 
 ---
 
-Bugs
+## Bugs
 
 **Solved Bugs**
 
