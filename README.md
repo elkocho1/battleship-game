@@ -70,7 +70,10 @@ Users the classic battleship game and try to win against the computer. In total 
 
 ### Languages:
 
-- [Python 3.12.1](https://www.python.org/downloads/release/python-3121/): used to anchor the project and direct all application behavior
+- [Python 3.12.1](https://www.python.org/downloads/release/python-3121/) was used to anchor the project and direct all application behavior
+
+- [JavaScript](https://www.javascript.com/) was used to provide the start script needed to run the Code Institute mock terminal in the browser
+
 
 ### Frameworks/Libraries, and Tools:
 #### Python modules:
