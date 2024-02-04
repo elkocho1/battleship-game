@@ -432,3 +432,4 @@ if __name__ == "__main__":
     """Call the game when programm runs"""
     game = Game()
     game.play()
+    
