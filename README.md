@@ -74,6 +74,8 @@ Users the classic battleship game and try to win against the computer. In total 
 
 - [JavaScript](https://www.javascript.com/) was used to provide the start script needed to run the Code Institute mock terminal in the browser
 
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) was used to construct the elements involved in building the mock terminal in the browser
+
 
 ### Frameworks/Libraries, and Tools:
 #### Python modules:
