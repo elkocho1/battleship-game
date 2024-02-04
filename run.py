@@ -353,7 +353,7 @@ class Game:
         """Start and loop the game"""
         while True:
             welcome_message = (f"""
-Battleship Python Game!
+Welcome to Battleship Python Game!
 Board Size ist 10 x 10 and each player has 8 ships.
 You have in total 50 bullets to take down the enemy ships.
 Each round the amount will be updated and the hits and misses are getting
